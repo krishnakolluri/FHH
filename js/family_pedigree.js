@@ -515,8 +515,8 @@ $('#health_table').css('width',masterRight);
 
     $('#optionsPanelMain').attr('width', '800px');
 
-    svg.line(LINEGROUP, masterleft - 100, 220, masterleft + 120, 220, {id: 'mel', stroke: 'black', strokeWidth: 3});
-    svg.line(LINEGROUP, masterleft + 25, 220, masterleft + 25, top, {id: 'mei', stroke: 'black', strokeWidth: 3});
+    svg.line(LINEGROUP, masterleft - 100, 220, masterleft + 120, 220, {id: 'mel', stroke: 'black', strokeWidth: 3}); //between paternal and maternal
+    svg.line(LINEGROUP, masterleft + 25, 220, masterleft + 25, top, {id: 'mei', stroke: 'black', strokeWidth: 3}); //perpendicular line to above
     svg.line(LINEGROUP, masterleft + 25, 220, masterleft + 25, top, {id: 'grmei', stroke: 'black', strokeWidth: 3});
     svg.line(LINEGROUP, masterleft - 140, 220, masterleft + 180, 220, {id: 'grmei1', stroke: 'black', strokeWidth: 3});
     svg.line(LINEGROUP, masterleft - 140, 200, masterleft - 140, 70, {id: 'grmei2', stroke: 'black', strokeWidth: 3});
@@ -1082,7 +1082,7 @@ $('#health_table').css('width',masterRight);
                 cursor: 'pointer',
                 genders: item.gender
             });
-            svg.line(LINEGROUP, mleft, 170, mleft, 200, {id: 'mst', stroke: 'black',strokeWidth: 3});
+            svg.line(LINEGROUP, mleft, 170, mleft, 200, {id: 'mst', stroke: 'black',strokeWidth: 3}); //200 - vertical line
 
             //Check the live status
             if (typeof item.estimated_death_age != 'undefined') {
@@ -1200,7 +1200,7 @@ $('#health_table').css('width',masterRight);
     //Load paternal Cousins
     PATERNAL_COUSINS_LOAD();
     //Load Maternal Cousins
-    MATERNAL_COUSINS_LOAD();
+    //MATERNAL_COUSINS_LOAD();
 
    
 
@@ -2220,13 +2220,13 @@ $('#health_table').css('width',masterRight);
         var TOTALKIDS = COUNT_FAMILY_KIDS(GrandChildrenArray);
         var TOTALMYKIDS = COUNT_FAMILY_KIDS(ChildrenArray);
 
-
-        if (MIDGEN.toUpperCase() == "MALE")svg.line(LINEGROUP, masterx + 65, mastery + 25, masterx + 65, mastery + 130, {
+         // values are 65,25,65,130
+        if (MIDGEN.toUpperCase() == "MALE")svg.line(LINEGROUP, masterx + 65, mastery + 20, masterx + 65, mastery + 130, {
             id: 'childs',
             stroke: 'black',
-            strokeWidth: 3
+            strokeWidth: 3 //this is the line that needs to be joined
         });
-        else svg.line(LINEGROUP, masterx + 45, mastery + 20, masterx + 45, mastery + 130, {id: 'childs', stroke: 'black', strokeWidth: 3});
+        else svg.line(LINEGROUP, masterx + 45, mastery + 20, masterx + 45, mastery + 130, {id: 'childs', stroke: 'black', strokeWidth: 3}); // from 3
 
 
         if (ARRAY.length > 0) {
@@ -2312,7 +2312,7 @@ $('#health_table').css('width',masterRight);
                             datakey: DATAKEY,
                             fill: gencolor,
                             stroke: 'black',
-                            strokeWidth: 2,
+                            strokeWidth: 2, // children border in diagram around the child
                             genders: 'male',
                             cursor: 'pointer'
                         });
@@ -2323,7 +2323,7 @@ $('#health_table').css('width',masterRight);
                             datakey: DATAKEY,
                             fill: gencolor,
                             stroke: 'black',
-                            strokeWidth: 2,
+                            strokeWidth: 2, // from 2
                             genders: 'female',
                             cursor: 'pointer'
                         });
@@ -3016,7 +3016,7 @@ $('#health_table').css('width',masterRight);
                         datakey: DATAKEY,
                         fill: gencolor,
                         stroke: 'black',
-                        strokeWidth: 2,
+                        strokeWidth: 3, // this is around maternal
                         genders: 'female',
                         cursor: 'pointer'
                     });
@@ -3247,21 +3247,21 @@ $('#health_table').css('width',masterRight);
         var p1, p2;
         if (MIDGEN == 'MALE') {
             if (PREVIOUSGEN == 'MALE') {
-                p1 = parseInt($('#' + PREVIOUSID).attr('x')) + 65;
+                p1 = parseInt($('#' + PREVIOUSID).attr('x')) + 65; // from 65 to 80
                 p2 = parseInt($('#' + PREVIOUSID).attr('y')) + 20;
             }
             else if (PREVIOUSGEN == 'FEMALE') {
-                p1 = parseInt($('#' + PREVIOUSID).attr('cx')) + 45;
+                p1 = parseInt($('#' + PREVIOUSID).attr('cx')) + 45; // from 45 to 85
                 p2 = parseInt($('#' + PREVIOUSID).attr('cy'));
             }
         }
         else {
             if (PREVIOUSGEN == 'MALE') {
-                p1 = parseInt($('#' + PREVIOUSID).attr('x')) + 100;
+                p1 = parseInt($('#' + PREVIOUSID).attr('x')) + 100; // 100 to 50
                 p2 = parseInt($('#' + PREVIOUSID).attr('y')) + 20;
             }
             else if (PREVIOUSGEN == 'FEMALE') {
-                p1 = parseInt($('#' + PREVIOUSID).attr('cx')) + 80;
+                p1 = parseInt($('#' + PREVIOUSID).attr('cx')) + 80; // 80 to 65
                 p2 = parseInt($('#' + PREVIOUSID).attr('cy'));
             }
         }
@@ -3275,17 +3275,17 @@ $('#health_table').css('width',masterRight);
         //if(GRANDGROUPS > 0){gp1 = parseInt(GRANDGROUPS) * 100}
         if (MIDGEN == 'MALE') {
             if (PARENTGEN == 'MALE') {
-                p1 = parseInt($('#' + PARENTID).attr('x')) + 40;
+                p1 = parseInt($('#' + PARENTID).attr('x')) + 40; // from 40
                 p2 = parseInt($('#' + PARENTID).attr('y')) + 20;
             }
             else if (PARENTGEN == 'FEMALE') {
-                p1 = parseInt($('#' + PARENTID).attr('cx')) + 25;
+                p1 = parseInt($('#' + PARENTID).attr('cx')) + 25; // fro, 25 to 65
                 p2 = parseInt($('#' + PARENTID).attr('cy'));
             }
         }
         else {
             if (PARENTGEN == 'MALE') {
-                p1 = parseInt($('#' + PARENTID).attr('x')) + 60;
+                p1 = parseInt($('#' + PARENTID).attr('x')) + 30; // change to 30
                 p2 = parseInt($('#' + PARENTID).attr('y')) + 20;
             }
             else if (PARENTGEN == 'FEMALE') {
@@ -3891,11 +3891,11 @@ $('#health_table').css('width',masterRight);
         var p1, p2;
 
         if (PARENTGEN == 'MALE') {
-            p1 = parseInt($('#' + PARENTID).attr('x')) + 20;
+            p1 = parseInt($('#' + PARENTID).attr('x')) + 20; // from 20 t0 1000
             p2 = parseInt($('#' + PARENTID).attr('y'));
         }
         else if (PARENTGEN == 'FEMALE') {
-            p1 = parseInt($('#' + PARENTID).attr('cx'));
+            p1 = parseInt($('#' + PARENTID).attr('cx'))
             p2 = parseInt($('#' + PARENTID).attr('cy')) - 20;
         }
         return [p1, p2]
@@ -3907,8 +3907,8 @@ $('#health_table').css('width',masterRight);
         var p1, p2;
 
         if (PARENTGEN == 'MALE') {
-            p1 = parseInt($('#' + PARENTID).attr('x')) + 40;
-            p2 = parseInt($('#' + PARENTID).attr('y'));
+            p1 = parseInt($('#' + PARENTID).attr('x')) + 40; //
+            p2 = parseInt($('#' + PARENTID).attr('y')) ; //
         }
         else if (PARENTGEN == 'FEMALE') {
             p1 = parseInt($('#' + PARENTID).attr('cx')) + 80;
@@ -3953,9 +3953,13 @@ $('#health_table').css('width',masterRight);
                         if(KIDS==0)KIDS=1;
                         var p1;
 
-                        //var check = IS_IN_ARRAY(NephewArray, BID);
+                        var check = IS_IN_ARRAY(NephewArray, BID);
+                        //if (check == 'found') p1 = parseInt(p1) - 140;
+                        //else
+                        //    p1 = PREVIOUSP1 - (parseInt(KIDS) * 105);
+
                         if(KIDS==1){
-                         p1 = PREVIOUSP1 - (parseInt(KIDS) * 145);
+                        p1 = PREVIOUSP1 - (parseInt(KIDS) * 145);
                         }
                         else{
                             p1 = PREVIOUSP1 - (parseInt(KIDS) * 105);
@@ -3966,7 +3970,6 @@ $('#health_table').css('width',masterRight);
 
                         //p1 = parseInt($('#' + BID).attr('x')) - 80;
                         //p1 = parseInt($('#' + MID).attr('x')) - 80;
-                        //if (check == 'found') p1 = parseInt(p1) - 140;
                         svg.rect(p1, Level3M, rr, rr, 1, 1, {
                             id: MID,
                             datakey: datakey,
@@ -3982,8 +3985,8 @@ $('#health_table').css('width',masterRight);
                     else if (key == (BrothersArray.length - 1)) {
                         var BID = BrothersArray[key - 1][1];
                         var check = IS_IN_ARRAY(NephewArray, BID);
-                        p1 = parseInt($('#' + BID).attr('x')) - 80
-                        if (check != -1) p1 = parseInt(p1) - 140;
+                        p1 = parseInt($('#' + BID).attr('x')) - 80;//from 80 to 800
+                        if (check != -1) p1 = parseInt(p1) - 140; // 140 to1400
                         svg.rect(p1, Level3M, rr, rr, 1, 1, {
                             id: MID,
                             datakey: datakey,
@@ -4381,16 +4384,17 @@ $('#health_table').css('width',masterRight);
 
         if (SistersArray.length > 0) {
             p2 = mastery;
+            var p1temp = new Array();
+
             $.each(SistersArray, function (key, value) {
                 var MIDGEN = value[0];
                 var MID = value[1];
-                var mid = value[1];
+              //  var mid = value[1];
                 var datakey = value[2];
-                var p1temp = new Array();
 
-                if ((ChildrenArray.length == 1)) {
+                if ((ChildrenArray.length > 1)) {
                     var d = ChildrenArray[ChildrenArray.length - 1];
-                    if (d[0] == 'MALE')lx = parseInt($('#' + d[1]).attr('x')) + 150;
+                    if (d[0] == 'MALE')lx = parseInt($('#' + d[1]).attr('x')) + 150; //150 to 15000
                     else lx = parseInt($('#' + d[1]).attr('cx')) + 150;
                 }
                 else if (ChildrenArray.length > 0) {
@@ -4409,9 +4413,19 @@ $('#health_table').css('width',masterRight);
                         var KIDS = COUNT_KIDS(NephewArray, PREVIOUSID);
 
                         if(KIDS==0)KIDS=1;
+                        var p1;
 
-                        var check = IS_IN_ARRAY(NephewArray, SID);
-                        var p1 = PREVIOUSP1 + (80 + (parseInt(KIDS)*(parseInt(KIDS) * 75))/parseInt(KIDS));
+                        if(KIDS==1){
+                            p1 = PREVIOUSP1 + (parseInt(KIDS) * 145); // from 145
+                        }
+                    else{
+                            p1 = PREVIOUSP1 + (parseInt(KIDS) * 105);
+                        }
+
+
+                        //var check = IS_IN_ARRAY(NephewArray, SID);
+                        //
+                        //var p1 = PREVIOUSP1 + (80 + (parseInt(KIDS)*(parseInt(KIDS) * 75))/parseInt(KIDS));
                         //if (check != -1) p1 = parseInt(p1) + 120;
 
                         p1temp.push(MIDGEN, MID, p1, PID);
@@ -4440,8 +4454,9 @@ $('#health_table').css('width',masterRight);
                         var check = IS_IN_ARRAY(NephewArray, SID);
 
                         var p1 = PREVIOUSP1 + (60 + (parseInt(KIDS)*(parseInt(KIDS) * 45))/parseInt(KIDS));
-                        //p1 = PREVIOUSP1 + 120;
-                        //if (check != -1) p1 = parseInt(p1) + 120;
+                        //nephews distrotion is solved with below 2 lines
+                        p1 = PREVIOUSP1 + 120;
+                        if (check != -1) p1 = parseInt(p1) + 120;
 
                         svg.circle(p1, Level3F, cr, {
                             id: MID,
@@ -4514,7 +4529,7 @@ $('#health_table').css('width',masterRight);
                         datakey: datakey,
                         fill: gencolor,
                         stroke: 'black',
-                        strokeWidth: 2,
+                        strokeWidth: 3,
                         genders: 'female',
                         cursor: 'pointer'
                     });
@@ -4545,9 +4560,9 @@ $('#health_table').css('width',masterRight);
 
         var mx = $('#mei').attr("x1");
         var my = $('#mei').attr("y1");
-        var POLYLINE3 = parseInt(my) + 160;
+        var POLYLINE3 = parseInt(my) + 160; // 160 to 1600
 
-        xl.push([[p1, p2 - 20], [mx, POLYLINE3]]);
+        xl.push([[p1, p2 -20], [mx, POLYLINE3]]);
         //Load the polyline
         svg.polyline(xl, {id: 'Td_' + pid, fill: 'none', stroke: 'black', strokeWidth: 3});
     }
@@ -4692,7 +4707,7 @@ $('#health_table').css('width',masterRight);
                         id: MID,
                         fill: gencolor,
                         stroke: 'black',
-                        strokeWidth: 2,
+                        strokeWidth: 2, // from  2
                         genders: 'female',
                         cursor: 'pointer'
                     });
@@ -5004,6 +5019,7 @@ $('#health_table').css('width',masterRight);
         //mdia = rr;
         //fdia = cr;
         //Build a spuce sign
+       // MATERNAL_SPOUCE_CONNECT(ID);
         if (GEN == 'FEMALE') {
             svg.rect(p1, p2, rr, rr, 1, 1, {
                 id: SPOUCE,
@@ -5374,7 +5390,7 @@ $('#health_table').css('width',masterRight);
         var GEN = $('#' + ID).attr('genders').toUpperCase();
 
         if (GEN == 'MALE') {
-            p1 = parseInt($('#' + ID).attr('x'));
+            p1 = parseInt($('#' + ID).attr('x')); // from 0 to 100
             p2 = parseInt($('#' + ID).attr('y'));
         }
         else if (GEN == 'FEMALE') {
@@ -5382,7 +5398,7 @@ $('#health_table').css('width',masterRight);
             p2 = parseInt($('#' + ID).attr('cy')) - 20;
         }
         xl.push([[p1 + 40, p2 + 20], [p1 + 125, p2 + 20]]);
-        svg.polyline(xl, {id: 'spl_' + ID, fill: 'none', stroke: 'black', strokeWidth: 3});
+        svg.polyline(xl, {id: 'spl_' + ID, fill: 'none', stroke: 'black', strokeWidth: 3}); // this is line between nephews parents
 
         return;
     }
@@ -5403,10 +5419,33 @@ $('#health_table').css('width',masterRight);
             p2 = parseInt($('#' + ID).attr('cy')) - 20;
         }
         xl.push([[p1 + 40, p2 + 20], [p1 + 100, p2 + 20]]);
-        svg.polyline(xl, {id: 'spl_' + ID, fill: 'none', stroke: 'black', strokeWidth: 3});
+        svg.polyline(xl, {id: 'spl_' + ID, fill: 'none', stroke: 'black', strokeWidth: 3}); //
 
         return;
     }
+
+    //maternal spouce connect added later while testing
+    function MATERNAL_SPOUCE_CONNECT(ID) {
+
+        var xl = new Array();
+        var p1, p2;
+        var GEN = $('#' + ID).attr('genders').toUpperCase();
+
+        if (GEN == 'MALE') {
+            p1 = parseInt($('#' + ID).attr('x')) + 100;
+            p2 = parseInt($('#' + ID).attr('y'));
+        }
+        else if (GEN == 'FEMALE') {
+            p1 = parseInt($('#' + ID).attr('cx')) + 120;
+            p2 = parseInt($('#' + ID).attr('cy')) + 20;
+        }
+        xl.push([[p1 + 40, p2 + 20], [p1 + 100, p2 + 20]]);
+        svg.polyline(xl, {id: 'spl_' + ID, fill: 'none', stroke: 'black', strokeWidth: 3}); //
+
+        return;
+    }
+
+
 
     //Load paternal cousins
     function MATERNAL_COUSINS_LOAD() {
@@ -5939,8 +5978,8 @@ $('#health_table').css('width',masterRight);
         var xl = new Array();
 
         if (PIDGEN == "FEMALE") {
-            var p1 = parseInt($('#' + PID).attr('cx')) - 45;
-            var p2 = parseInt($('#' + PID).attr('cy')) - 20;
+            var p1 = parseInt($('#' + PID).attr('cx')) - 45; // from 45 to 1000
+            var p2 = parseInt($('#' + PID).attr('cy')) - 20; // from 20 to 1000
         }
         else {
             var p1 = parseInt($('#' + PID).attr('x')) - 20;
@@ -5950,10 +5989,9 @@ $('#health_table').css('width',masterRight);
         if(MIDGEN=='FEMALE')var target1 = parseInt(target1) - 0 ;
         else var target1 = parseInt(target1) + 20;
 
-        xl.push([[target1, parseInt(LEVEL)-20], [target1, parseInt(LEVEL)-20],[target1,parseInt(LEVEL)-20],[parseInt(p1)+45, parseInt(LEVEL)-20]]);
+        xl.push([[target1, parseInt(LEVEL)-20], [target1, parseInt(LEVEL)-20],[target1,parseInt(LEVEL)-20],[parseInt(p1)+40, parseInt(LEVEL)-20]]); // changed 45 to 40 for distortion
 
-
-        svg.polyline(xl, {id: 'Hbss_' + MID, fill: 'none', stroke: 'black', strokeWidth: 3});
+        svg.polyline(xl, {id: 'Hbss_' + MID, fill: 'none', stroke: 'black', strokeWidth: 3}); // from 3
     }
 
     function SINGLE_LEFT_CORNER_CONNECTOR(PID, MID, MIDGEN, PIDGEN, LEVEL, target1) {
@@ -5985,9 +6023,9 @@ $('#health_table').css('width',masterRight);
             var p2 = parseInt($('#' + PID).attr('cy'));
         }
         else {
-            var p1 = parseInt($('#' + PID).attr('x'))  - 0;
+            var p1 = parseInt($('#' + PID).attr('x'))  - 0; // from 0 to 1000
             var p2 = parseInt($('#' + PID).attr('y')) + 20;
-            target1 = parseInt(target1)+20;
+            target1 = parseInt(target1)+40; // from 20 to 40
         }
         if(MIDGEN=='MALE') target1 = parseInt(target1) + 20;
         //else return p1;
@@ -6023,7 +6061,7 @@ $('#health_table').css('width',masterRight);
         var x, y, ex, ey;
 
         if (PIDGEN == "FEMALE") {
-            x = parseInt($('#' + PID).attr('cx')) + 45;
+            x = parseInt($('#' + PID).attr('cx')) + 45; //change to 100 from 45 and 20
             y = parseInt($('#' + PID).attr('cy')) - 20;
         }
         else if (PIDGEN == "MALE") {
@@ -6036,7 +6074,7 @@ $('#health_table').css('width',masterRight);
                 y = parseInt($('#' + PID).attr('y'));
             }
         }
-        xl.push([[x, y + 20], [x, LEVEL - 0]]);
+        xl.push([[x, y+20 ], [x, LEVEL - 0]]);
 
         svg.polyline(xl, {id: 'Tcrs_' + MID, fill: 'none', stroke: 'black', strokeWidth: 3});
         return false;
@@ -6070,7 +6108,7 @@ $('#health_table').css('width',masterRight);
             var y = parseInt($('#' + PID).attr('y')) + 0;
         }
         xl.push([[x, y + 20], [x, LEVEL - 0]]);
-        svg.polyline(xl, {id: 'Tlrs_' + MID, fill: 'none', stroke: 'black', strokeWidth: 3});
+        svg.polyline(xl, {id: 'Tlrs_' + MID, fill: 'none', stroke: 'black', strokeWidth: 3}); // vertical line
         return false;
     }
 
@@ -7104,7 +7142,6 @@ function TheZoomMain(sel) {
 
     allXarray = allXarray.sort(function(a,b){return a - b}) //Array now becomes [7, 8, 25, 41]
     allYarray = allYarray.sort(function(a,b){return a - b}) //Array now becomes [7, 8, 25, 41]
-
     var selectedVal = sel.options[sel.selectedIndex].value;
 
     var arr = new Array();
@@ -7114,6 +7151,10 @@ function TheZoomMain(sel) {
     var height=600;
     var newX=100;
     var newY=100;
+
+
+
+
 
     if (selectedVal == '200') {
         if(nowselected=='200')return;
@@ -7248,11 +7289,10 @@ function TheZoomMain(sel) {
     else if(selectedVal == '100') {
 
         nowselected = selectedVal;
-        $(mdialog).dialog("close");
+        $(mdialog).dialog("open");
         //$(mdialog).find('form')[0].reset();
+
         xmlload();
-
-
     }
 }
 
